@@ -29,41 +29,41 @@ enum CustomSynth: Int, PatchPoint {
 	case vcoOut
 
 	static var `default`: CustomSynth = .vco
-	static let colCount: Int = 1
+	static let colCount: Int = 2
 	static let rowCount: Int = 1
 	static var synthName: String = "My Custom Synth"
     
-    var type: PatchType {
-        switch self {
-        case .vco: return .input
-        case .vcoOut: return .output
-        }
-    }
+	var type: PatchType {
+	    switch self {
+	    case .vco: return .input
+	    case .vcoOut: return .output
+	    }
+	}
     
-    var name: String {
-        switch self {
-        case .vco1: return "VCO CV"
-        case .vco1Sub: return "VCO OUT"
-        }
-    }
+	var name: String {
+	    switch self {
+	    case .vco: return "VCO CV"
+	    case .vcoOut: return "VCO OUT"
+	    }
+	}
     
-    var patchable: Bool {
-        switch self {
-        case .vco1: return true
-        case .vco1Sub: return true
-        }
-    }
+	var patchable: Bool {
+	    switch self {
+	    case .vco: return true
+	    case .vcoOut: return true
+	    }
+	}
 }
 ```
 
 ## DFAM
 
-![alt](https://raw.githubusercontent.com/cemolcay/MotherDiceGame/master/pb-dfam.png)
+![alt](https://raw.githubusercontent.com/cemolcay/MothersDiceGame/master/pb-dfam.png)
 
 ## Mother-32
 
-![alt](https://raw.githubusercontent.com/cemolcay/MotherDiceGame/master/pb-m32.png)
+![alt](https://raw.githubusercontent.com/cemolcay/MothersDiceGame/master/pb-m32.png)
 
 ## Subharmonicon
 
-![alt](https://raw.githubusercontent.com/cemolcay/MotherDiceGame/master/pb-subh.png)
+![alt](https://raw.githubusercontent.com/cemolcay/MothersDiceGame/master/pb-subh.png)
