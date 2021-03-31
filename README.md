@@ -1,5 +1,4 @@
 # Mother's Dice Game
-====
 
 Random patch generator inspired by the [Moog Sound Studio](https://www.moogmusic.com/news/moog-music-introduces-complete-synthesizer-studio-experience) kit's dice game.
 
@@ -30,9 +29,9 @@ enum CustomSynth: Int, PatchPoint {
 	case vcoOut
 
 	static var `default`: CustomSynth = .vco
-    static let colCount: Int = 1
-    static let rowCount: Int = 1
-    static var synthName: String = "My Custom Synth"
+	static let colCount: Int = 1
+	static let rowCount: Int = 1
+	static var synthName: String = "My Custom Synth"
     
     var type: PatchType {
         switch self {
@@ -59,12 +58,12 @@ enum CustomSynth: Int, PatchPoint {
 
 ## DFAM
 
-![alt](https://raw.githubusercontent.com/cemolcay/MotherDiceGame/master/pg-dfam.png)
+![alt](https://raw.githubusercontent.com/cemolcay/MotherDiceGame/master/pb-dfam.png)
 
 ## Mother-32
 
-![alt](https://raw.githubusercontent.com/cemolcay/MotherDiceGame/master/pg-m32.png)
+![alt](https://raw.githubusercontent.com/cemolcay/MotherDiceGame/master/pb-m32.png)
 
 ## Subharmonicon
 
-![alt](https://raw.githubusercontent.com/cemolcay/MotherDiceGame/master/pg-subh.png)
+![alt](https://raw.githubusercontent.com/cemolcay/MotherDiceGame/master/pb-subh.png)
