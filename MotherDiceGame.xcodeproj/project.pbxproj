@@ -13,6 +13,8 @@
 		C1B690FA261509EE00FEB145 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C1B690F8261509EE00FEB145 /* Main.storyboard */; };
 		C1B690FC261509EF00FEB145 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C1B690FB261509EF00FEB145 /* Assets.xcassets */; };
 		C1B690FF261509EF00FEB145 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C1B690FD261509EF00FEB145 /* LaunchScreen.storyboard */; };
+		C1B6910B26150F1600FEB145 /* PatchBay.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B6910A26150F1600FEB145 /* PatchBay.swift */; };
+		C1B6910E2615196E00FEB145 /* PatchBayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B6910D2615196E00FEB145 /* PatchBayView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		C1B690FB261509EF00FEB145 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C1B690FE261509EF00FEB145 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C1B69100261509EF00FEB145 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C1B6910A26150F1600FEB145 /* PatchBay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatchBay.swift; sourceTree = "<group>"; };
+		C1B6910D2615196E00FEB145 /* PatchBayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatchBayView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +67,8 @@
 				C1B690FB261509EF00FEB145 /* Assets.xcassets */,
 				C1B690FD261509EF00FEB145 /* LaunchScreen.storyboard */,
 				C1B69100261509EF00FEB145 /* Info.plist */,
+				C1B6910A26150F1600FEB145 /* PatchBay.swift */,
+				C1B6910D2615196E00FEB145 /* PatchBayView.swift */,
 			);
 			path = MotherDiceGame;
 			sourceTree = "<group>";
@@ -138,7 +144,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				C1B690F7261509EE00FEB145 /* ViewController.swift in Sources */,
+				C1B6910E2615196E00FEB145 /* PatchBayView.swift in Sources */,
 				C1B690F3261509EE00FEB145 /* AppDelegate.swift in Sources */,
+				C1B6910B26150F1600FEB145 /* PatchBay.swift in Sources */,
 				C1B690F5261509EE00FEB145 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
