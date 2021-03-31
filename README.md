@@ -6,7 +6,7 @@ Random patch generator inspired by the [Moog Sound Studio](https://www.moogmusic
 
 Includes DFAM, Mother-32 and Subharmonicon patch bays as custom `UIView` instances.
 
-You can create as many instances as you want and use auto-layout on them or embed them in stack views.
+You can create as many `PatchBay` instances with `PatchBayView`s as you want and apply auto-layout on them or embed them in stack views.
 
 ``` swift
 let dfam = PatchBayView<DFAM>(frame: .zero)
@@ -14,7 +14,7 @@ let mother32 = PatchBayView<Mother32>(frame: .zero)
 let subharmonicon = PatchBayView<Subharmonicon>(frame: .zero)
 ```
 
-## PatchPoint
+## PatchBay
 
 You can use this protocol and create other synths. 
 

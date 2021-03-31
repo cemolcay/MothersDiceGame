@@ -7,13 +7,13 @@
 
 import UIKit
 
-enum PatchType: Int, Codable {
+enum PatchPointType: Int, Codable {
     case output
     case input
 }
 
-protocol PatchPoint: RawRepresentable, CaseIterable, Codable {
-    var type: PatchType { get }
+protocol PatchBay: RawRepresentable, CaseIterable, Codable {
+    var type: PatchPointType { get }
     var name: String { get }
     var patchable: Bool { get }
     static var synthName: String { get }
@@ -22,7 +22,7 @@ protocol PatchPoint: RawRepresentable, CaseIterable, Codable {
     static var `default`: Self { get }
 }
 
-enum DFAM: Int, PatchPoint {
+enum DFAM: Int, PatchBay {
     case trigger
     case vcaCV
     case vcaOut
@@ -53,7 +53,7 @@ enum DFAM: Int, PatchPoint {
     static let rowCount: Int = 8
     static var synthName: String = "DFAM"
     
-    var type: PatchType {
+    var type: PatchPointType {
         switch self {
         case .trigger: return .input
         case .vcaCV: return .input
@@ -141,7 +141,7 @@ enum DFAM: Int, PatchPoint {
     }
 }
 
-enum Mother32: Int, PatchPoint {
+enum Mother32: Int, PatchBay {
     case extAudio
     case mixCV
     case vcaCV
@@ -180,7 +180,7 @@ enum Mother32: Int, PatchPoint {
     static let rowCount: Int = 8
     static var synthName: String = "MOTHER 32"
     
-    var type: PatchType {
+    var type: PatchPointType {
         switch self {
         case .extAudio: return .input
         case .mixCV: return .input
@@ -292,7 +292,7 @@ enum Mother32: Int, PatchPoint {
     }
 }
 
-enum Subharmonicon: Int, PatchPoint {
+enum Subharmonicon: Int, PatchBay {
     case vco1
     case vco1Sub
     case vco1PWM
@@ -331,7 +331,7 @@ enum Subharmonicon: Int, PatchPoint {
     static let rowCount: Int = 8
     static var synthName: String = "SUBHARMONICON"
     
-    var type: PatchType {
+    var type: PatchPointType {
         switch self {
         case .vco1: return .input
         case .vco1Sub: return .input

@@ -64,7 +64,7 @@ class PatchView: UIView {
     }
 }
 
-class PatchPointView<T: PatchPoint>: UIView {
+class PatchPointView<T: PatchBay>: UIView {
     let patchPoint: T
     let layoutStack = UIStackView()
     let label = UILabel()
@@ -122,7 +122,7 @@ class PatchPointView<T: PatchPoint>: UIView {
     }
 }
 
-class PatchBayView<T: PatchPoint>: UIView {
+class PatchBayView<T: PatchBay>: UIView {
     let layoutStack = UIStackView()
     var patchPoints: [PatchPointView<T>] = []
 
