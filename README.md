@@ -4,57 +4,83 @@ Random patch generator inspired by the [Moog Sound Studio](https://www.moogmusic
 
 ## PatchBayView
 
-Includes DFAM, Mother-32 and Subharmonicon patch bays as custom `UIView` instances.
+Includes DFAM, Mother-32 and Subharmonicon patch bays as custom `UIView` instances.  
 
 You can create as many `PatchBay` instances with `PatchBayView`s as you want and apply auto-layout on them or embed them in stack views.
 
 ``` swift
-let dfam = PatchBayView<DFAM>(frame: .zero)
-let mother32 = PatchBayView<Mother32>(frame: .zero)
-let subharmonicon = PatchBayView<Subharmonicon>(frame: .zero)
+let dfam = PatchBayView<DFAM>(patchBay: DFAM())
+let mother32 = PatchBayView<Mother32>(patchBay: Mother32())
+let subharmonicon = PatchBayView<Subharmonicon>(patchBay: Subharmonicon())
 ```
 
 ## PatchBay
 
 You can use this protocol and create other synths. 
 
-- Create an enum with `Int` rawValue,
-- Conform to `PatchPoint` protocol
+- Create a final class conforming `PatchBay`,
+- Implement `PatchBay` protocol values.
+- Create the patch points inside an enum conforming `PatchPoint`,
 - Add the patch points as cases.
-- Implement `PatchPoint` set protocol values.
+- Implement `PatchPoint` protocol values.
 
 ``` swift
-enum CustomSynth: Int, PatchPoint {
-	case vco
-	case vcoOut
+final class CustomSynth: PatchBay {
+    typealias PatchPoints = PB
+    var name: String = "My Custom Synth"
+    var colCount: Int = 2
+    var rowCount: Int = 1
 
-	static var `default`: CustomSynth = .vco
-	static let colCount: Int = 2
-	static let rowCount: Int = 1
-	static var synthName: String = "My Custom Synth"
-    
-	var type: PatchType {
-	    switch self {
-	    case .vco: return .input
-	    case .vcoOut: return .output
-	    }
-	}
-    
-	var name: String {
-	    switch self {
-	    case .vco: return "VCO CV"
-	    case .vcoOut: return "VCO OUT"
-	    }
-	}
-    
-	var patchable: Bool {
-	    switch self {
-	    case .vco: return true
-	    case .vcoOut: return true
-	    }
-	}
+    enum PB: Int, PatchPoint {
+        case vco
+        case vcoOut
+        
+        var type: PatchType {
+            switch self {
+            case .vco: return .input
+            case .vcoOut: return .output
+            }
+        }
+        
+        var name: String {
+            switch self {
+            case .vco: return "VCO CV"
+            case .vcoOut: return "VCO OUT"
+            }
+        }
+        
+        var patchable: Bool {
+            switch self {
+            case .vco: return true
+            case .vcoOut: return true
+            }
+        }
+    }
 }
 ```
+
+## Patch Generator
+
+- Create an instance of `PatchGenerator`.
+- Add rule set for allowed patch point connections.
+- Call `generatePatch()` function on the patch generator.
+- It returns a `Patch` struct which includes the input and output `PatchPoint`s in `Patchable` format.
+- You can use the `highlight(patch: Patch)` function on `PatchBayView`s for highlighting the patch points.
+
+```swift
+let generator = PatchGenerator()
+
+generator.addRule(fromPatchBay: dfam, toPatchBay: dfam)
+generator.addRule(fromPatchBay: dfam, toPatchBay: mother32)
+generator.addRule(fromPatchBay: mother32, toPatchBay: dfam)
+generator.addRule(fromPatchBay: mother32, toPatchBay: mother32)
+
+let patch = generator.generatePatch()
+dfam.highlight(patch: patch)
+mother32.highlight(patch: patch)
+```
+
+![alt](https://raw.githubusercontent.com/cemolcay/MothersDiceGame/master/pb.gif)
 
 ## DFAM
 

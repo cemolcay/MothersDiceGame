@@ -47,7 +47,7 @@ class PatchView: UIView {
         outCircle.lineWidth = lineWidth
         outCircle.stroke()
 
-        // outer circle
+        // inner circle
         let inCircle = UIBezierPath(
             arcCenter: CGPoint(x: rect.midX, y: rect.midY),
             radius: radiusOuterCircle / 2.25,
@@ -64,30 +64,21 @@ class PatchView: UIView {
     }
 }
 
-class PatchPointView<T: PatchBay>: UIView {
-    let patchPoint: T
+class PatchPointView<T: PatchPoint>: UIView {
+    let patchPoint: T!
     let layoutStack = UIStackView()
     let label = UILabel()
     let patchView = PatchView()
-    
-    // MARK: Init
-    
+        
     init(patchPoint: T) {
         self.patchPoint = patchPoint
         super.init(frame: .zero)
         commonInit()
     }
     
-    override init(frame: CGRect) {
-        self.patchPoint = T.default
-        super.init(frame: frame)
-        commonInit()
-    }
-    
     required init?(coder: NSCoder) {
-        self.patchPoint = T.default
+        self.patchPoint = .none
         super.init(coder: coder)
-        commonInit()
     }
     
     func commonInit() {
@@ -120,20 +111,56 @@ class PatchPointView<T: PatchBay>: UIView {
         super.layoutSubviews()
         patchView.setNeedsDisplay()
     }
+
+    func highlight() {
+        patchView.backgroundColor = .red
+    }
+    
+    func unhighlight() {
+        patchView.backgroundColor = .clear
+    }
 }
 
-class PatchBayView<T: PatchBay>: UIView {
-    let layoutStack = UIStackView()
-    var patchPoints: [PatchPointView<T>] = []
+protocol PatchableView where Self: UIView {
+    associatedtype PatchBayType: PatchBay
+    var patchBay: PatchBayType { get set }
+    var patchPointViews: [PatchPointView<PatchBayType.PatchPoints>] { get set }
+}
 
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+extension PatchableView {
+    func highlight(patchPoint: AnyPatchable) {
+        if let point = patchPoint.hash.base as? PatchBayType.PatchPoints,
+           let pointView = patchPointViews.first(where: { $0.patchPoint == point }) {
+            pointView.highlight()
+        }
+    }
+
+    func highlight(patch: Patch) {
+        unhighlight()
+        highlight(patchPoint: patch.input)
+        highlight(patchPoint: patch.output)
+    }
+    
+    func unhighlight() {
+        patchPointViews.forEach({ $0.unhighlight() })
+    }
+}
+
+class PatchBayView<T: PatchBay>: UIView, PatchableView {
+    typealias PatchBayType = T
+    var patchBay: T
+    var patchPointViews: [PatchPointView<T.PatchPoints>] = []
+    let layoutStack = UIStackView()
+
+    init(patchBay: T) {
+        self.patchBay = patchBay
+        super.init(frame: .zero)
         commonInit()
     }
     
     required init?(coder: NSCoder) {
+        self.patchBay = .init()
         super.init(coder: coder)
-        commonInit()
     }
     
     func commonInit() {
@@ -149,7 +176,7 @@ class PatchBayView<T: PatchBay>: UIView {
         layoutStack.distribution = .fill
 
         let text = NSMutableAttributedString(
-            string: "\(T.synthName) - IN / ",
+            string: "\(patchBay.name) - IN / ",
             attributes: [NSAttributedString.Key.foregroundColor: UIColor.black])
         text.append(NSAttributedString(
             string: " OUT ",
@@ -173,7 +200,7 @@ class PatchBayView<T: PatchBay>: UIView {
         patchBayStack.distribution = .fillEqually
         layoutStack.addArrangedSubview(patchBayStack)
 
-        for x in 0..<T.rowCount {
+        for x in 0..<patchBay.rowCount {
             let rowStack = UIStackView()
             rowStack.axis = .horizontal
             rowStack.spacing = 8
@@ -181,11 +208,11 @@ class PatchBayView<T: PatchBay>: UIView {
             rowStack.distribution = .fillEqually
             patchBayStack.addArrangedSubview(rowStack)
             
-            for y in 0..<T.colCount {
-                guard let patchPoint = T(rawValue: (x * T.colCount) + y as! T.RawValue) else { continue }
-                let patchPointView = PatchPointView<T>(patchPoint: patchPoint)
+            for y in 0..<patchBay.colCount {
+                guard let patchPoint = T.PatchPoints(rawValue: (x * patchBay.colCount) + y as! T.PatchPoints.RawValue) else { continue }
+                let patchPointView = PatchPointView<T.PatchPoints>(patchPoint: patchPoint)
                 rowStack.addArrangedSubview(patchPointView)
-                patchPoints.append(patchPointView)
+                patchPointViews.append(patchPointView)
             }
         }
     }

@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C18DCED126160CF700614DFB /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = C18DCED026160CF700614DFB /* README.md */; };
+		C18DCED52616138C00614DFB /* DFAM.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18DCED42616138C00614DFB /* DFAM.swift */; };
+		C18DCED8261613AE00614DFB /* Mother32.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18DCED7261613AE00614DFB /* Mother32.swift */; };
+		C18DCEDB261613C600614DFB /* Subharmonicon.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18DCEDA261613C600614DFB /* Subharmonicon.swift */; };
 		C1B690F3261509EE00FEB145 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B690F2261509EE00FEB145 /* AppDelegate.swift */; };
 		C1B690F5261509EE00FEB145 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B690F4261509EE00FEB145 /* SceneDelegate.swift */; };
 		C1B690F7261509EE00FEB145 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B690F6261509EE00FEB145 /* ViewController.swift */; };
@@ -19,6 +23,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C18DCED026160CF700614DFB /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
+		C18DCED42616138C00614DFB /* DFAM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DFAM.swift; sourceTree = "<group>"; };
+		C18DCED7261613AE00614DFB /* Mother32.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mother32.swift; sourceTree = "<group>"; };
+		C18DCEDA261613C600614DFB /* Subharmonicon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Subharmonicon.swift; sourceTree = "<group>"; };
 		C1B690EF261509EE00FEB145 /* MotherDiceGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MotherDiceGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C1B690F2261509EE00FEB145 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C1B690F4261509EE00FEB145 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -65,13 +73,17 @@
 				C1B690F2261509EE00FEB145 /* AppDelegate.swift */,
 				C1B690F4261509EE00FEB145 /* SceneDelegate.swift */,
 				C1B690F6261509EE00FEB145 /* ViewController.swift */,
+				C1B6910A26150F1600FEB145 /* PatchBay.swift */,
+				C1B6910D2615196E00FEB145 /* PatchBayView.swift */,
+				C1B6911226153C5A00FEB145 /* PatchGenerator.swift */,
+				C18DCED42616138C00614DFB /* DFAM.swift */,
+				C18DCED7261613AE00614DFB /* Mother32.swift */,
+				C18DCEDA261613C600614DFB /* Subharmonicon.swift */,
 				C1B690F8261509EE00FEB145 /* Main.storyboard */,
 				C1B690FB261509EF00FEB145 /* Assets.xcassets */,
 				C1B690FD261509EF00FEB145 /* LaunchScreen.storyboard */,
 				C1B69100261509EF00FEB145 /* Info.plist */,
-				C1B6910A26150F1600FEB145 /* PatchBay.swift */,
-				C1B6910D2615196E00FEB145 /* PatchBayView.swift */,
-				C1B6911226153C5A00FEB145 /* PatchGenerator.swift */,
+				C18DCED026160CF700614DFB /* README.md */,
 			);
 			path = MotherDiceGame;
 			sourceTree = "<group>";
@@ -135,6 +147,7 @@
 			files = (
 				C1B690FF261509EF00FEB145 /* LaunchScreen.storyboard in Resources */,
 				C1B690FC261509EF00FEB145 /* Assets.xcassets in Resources */,
+				C18DCED126160CF700614DFB /* README.md in Resources */,
 				C1B690FA261509EE00FEB145 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -148,8 +161,11 @@
 			files = (
 				C1B6911326153C5A00FEB145 /* PatchGenerator.swift in Sources */,
 				C1B690F7261509EE00FEB145 /* ViewController.swift in Sources */,
+				C18DCED52616138C00614DFB /* DFAM.swift in Sources */,
 				C1B6910E2615196E00FEB145 /* PatchBayView.swift in Sources */,
+				C18DCEDB261613C600614DFB /* Subharmonicon.swift in Sources */,
 				C1B690F3261509EE00FEB145 /* AppDelegate.swift in Sources */,
+				C18DCED8261613AE00614DFB /* Mother32.swift in Sources */,
 				C1B6910B26150F1600FEB145 /* PatchBay.swift in Sources */,
 				C1B690F5261509EE00FEB145 /* SceneDelegate.swift in Sources */,
 			);
