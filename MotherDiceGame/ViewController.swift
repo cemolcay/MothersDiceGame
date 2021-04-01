@@ -13,7 +13,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
 
         let dfam = DFAM()
-        let dfamView = dfam.patchBayView()
+        let dfamView = dfam.view
         view.addSubview(dfamView)
         dfamView.translatesAutoresizingMaskIntoConstraints = false
         dfamView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
@@ -22,7 +22,7 @@ class ViewController: UIViewController {
         dfamView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
 //
 //        let mother32 = Mother32()
-//        let mother32View = mother32.patchBayView()
+//        let mother32View = mother32.view
 //        view.addSubview(mother32View)
 //        mother32View.translatesAutoresizingMaskIntoConstraints = false
 //        mother32View.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
@@ -31,7 +31,7 @@ class ViewController: UIViewController {
 //        mother32View.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         
 //        let subharmonicon = Subharmonicon()
-//        let subharmoniconView = subharmonicon.patchBayView()
+//        let subharmoniconView = subharmonicon.view
 //        view.addSubview(subharmoniconView)
 //        subharmoniconView.translatesAutoresizingMaskIntoConstraints = false
 //        subharmoniconView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true

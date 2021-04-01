@@ -7,12 +7,12 @@
 
 import UIKit
 
-enum PatchPointType: Int, Codable {
+enum PatchPointType: Int, Codable, Hashable {
     case output
     case input
 }
 
-protocol PatchBay: class, Codable {
+protocol PatchBay: class, Codable, Hashable {
     associatedtype PatchPoints: PatchPoint
     var name: String { get }
     var colCount: Int { get }
@@ -20,16 +20,25 @@ protocol PatchBay: class, Codable {
 }
 
 extension PatchBay {
+    
     var patchPoints: [PatchPoints] {
         return PatchPoints.allCases as! [PatchPoints]
     }
     
-    func patchBayView() -> PatchBayView<Self> {
+    var view: PatchBayView<Self> {
         return PatchBayView<Self>(patchBay: self)
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(patchPoints)
+    }
+    
+    static func ==(lhs: Self, rhs: Self) -> Bool {
+        return lhs.hashValue == rhs.hashValue
     }
 }
 
-protocol PatchPoint: RawRepresentable, CaseIterable, Codable {
+protocol PatchPoint: RawRepresentable, CaseIterable, Codable, Hashable {
     var type: PatchPointType { get }
     var name: String { get }
     var patchable: Bool { get }
