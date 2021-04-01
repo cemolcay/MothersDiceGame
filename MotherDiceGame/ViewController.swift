@@ -12,29 +12,32 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let dfam = PatchBayView<DFAM>(frame: .zero)
-        view.addSubview(dfam)
-        dfam.translatesAutoresizingMaskIntoConstraints = false
-        dfam.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-        dfam.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-        dfam.topAnchor.constraint(equalTo: view.topAnchor, constant: 60).isActive = true
-        dfam.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        let dfam = DFAM()
+        let dfamView = dfam.patchBayView()
+        view.addSubview(dfamView)
+        dfamView.translatesAutoresizingMaskIntoConstraints = false
+        dfamView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        dfamView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        dfamView.topAnchor.constraint(equalTo: view.topAnchor, constant: 60).isActive = true
+        dfamView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
 //
-//        let mother32 = PatchBayView<Mother32>(frame: .zero)
-//        view.addSubview(mother32)
-//        mother32.translatesAutoresizingMaskIntoConstraints = false
-//        mother32.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-//        mother32.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-//        mother32.topAnchor.constraint(equalTo: view.topAnchor, constant: 60).isActive = true
-//        mother32.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+//        let mother32 = Mother32()
+//        let mother32View = mother32.patchBayView()
+//        view.addSubview(mother32View)
+//        mother32View.translatesAutoresizingMaskIntoConstraints = false
+//        mother32View.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+//        mother32View.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+//        mother32View.topAnchor.constraint(equalTo: view.topAnchor, constant: 60).isActive = true
+//        mother32View.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         
-//        let subharmonicon = PatchBayView<Subharmonicon>(frame: .zero)
-//        view.addSubview(subharmonicon)
-//        subharmonicon.translatesAutoresizingMaskIntoConstraints = false
-//        subharmonicon.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-//        subharmonicon.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-//        subharmonicon.topAnchor.constraint(equalTo: view.topAnchor, constant: 60).isActive = true
-//        subharmonicon.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+//        let subharmonicon = Subharmonicon()
+//        let subharmoniconView = subharmonicon.patchBayView()
+//        view.addSubview(subharmoniconView)
+//        subharmoniconView.translatesAutoresizingMaskIntoConstraints = false
+//        subharmoniconView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+//        subharmoniconView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+//        subharmoniconView.topAnchor.constraint(equalTo: view.topAnchor, constant: 60).isActive = true
+//        subharmoniconView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         
 //        let layout = UIStackView()
 //        view.addSubview(layout)
@@ -47,7 +50,7 @@ class ViewController: UIViewController {
 //        layout.spacing = 8
 //        layout.alignment = .fill
 //        layout.distribution = .fillEqually
-//        layout.addArrangedSubview(dfam)
-//        layout.addArrangedSubview(mother32)
+//        layout.addArrangedSubview(dfamView)
+//        layout.addArrangedSubview(mother32View)
     }
 }
