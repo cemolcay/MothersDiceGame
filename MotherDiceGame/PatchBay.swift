@@ -7,6 +7,23 @@
 
 import UIKit
 
+protocol Patchable: Hashable {}
+struct AnyPatchable: Patchable {
+    var hash: AnyHashable
+    
+    init<T: Patchable>(_ patchable: T) {
+        self.hash = AnyHashable(patchable)
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(hash)
+    }
+    
+    static func == (lhs: AnyPatchable, rhs: AnyPatchable) -> Bool {
+        return lhs.hashValue == rhs.hashValue
+    }
+}
+
 enum PatchPointType: Int, Codable, Hashable {
     case output
     case input
@@ -17,10 +34,11 @@ protocol PatchBay: class, Codable, Hashable {
     var name: String { get }
     var colCount: Int { get }
     var rowCount: Int { get }
+    init()
 }
 
 extension PatchBay {
-    
+        
     var patchPoints: [PatchPoints] {
         return PatchPoints.allCases as! [PatchPoints]
     }
@@ -38,13 +56,13 @@ extension PatchBay {
     }
 }
 
-protocol PatchPoint: RawRepresentable, CaseIterable, Codable, Hashable {
+protocol PatchPoint: RawRepresentable, CaseIterable, Codable, Patchable {
     var type: PatchPointType { get }
     var name: String { get }
     var patchable: Bool { get }
 }
 
-class DFAM: PatchBay {
+final class DFAM: PatchBay {
     typealias PatchPoints = PB
     var name: String = "DFAM"
     var colCount: Int = 3
@@ -166,7 +184,7 @@ class DFAM: PatchBay {
     }
 }
 
-class Mother32: PatchBay {
+final class Mother32: PatchBay {
     typealias PatchPoints = PB
     var name: String = "MOTHER 32"
     var colCount: Int = 4
@@ -320,7 +338,7 @@ class Mother32: PatchBay {
     }
 }
 
-class Subharmonicon: PatchBay {
+final class Subharmonicon: PatchBay {
     typealias PatchPoints = PB
     var name: String = "SUBHARMONICON"
     var colCount: Int = 4

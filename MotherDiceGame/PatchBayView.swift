@@ -111,12 +111,39 @@ class PatchPointView<T: PatchPoint>: UIView {
         super.layoutSubviews()
         patchView.setNeedsDisplay()
     }
+
+    func highlight() {
+        backgroundColor = patchPoint.type == .input ? .blue : .red
+    }
+    
+    func unhighlight() {
+        backgroundColor = .clear
+    }
 }
 
-class PatchBayView<T: PatchBay>: UIView {
-    weak var patchBay: T!
-    let layoutStack = UIStackView()
+protocol PatchableView where Self: UIView {
+    associatedtype PatchBayType: PatchBay
+    var patchBay: PatchBayType { get set }
+    var patchPoints: [PatchPointView<PatchBayType.PatchPoints>] { get set }
+}
+
+extension PatchableView {
+    func highlight(patchPoint: AnyPatchable) {
+        if let point = patchPoints.first(where: { $0.patchPoint.hashValue == patchPoint.hashValue }) {
+            point.highlight()
+        }
+    }
+    
+    func unhighlight() {
+        patchPoints.forEach({ $0.unhighlight() })
+    }
+}
+
+class PatchBayView<T: PatchBay>: UIView, PatchableView {
+    typealias PatchBayType = T
+    var patchBay: T
     var patchPoints: [PatchPointView<T.PatchPoints>] = []
+    let layoutStack = UIStackView()
 
     init(patchBay: T) {
         self.patchBay = patchBay
@@ -125,7 +152,7 @@ class PatchBayView<T: PatchBay>: UIView {
     }
     
     required init?(coder: NSCoder) {
-        patchBay = .none
+        self.patchBay = .init()
         super.init(coder: coder)
     }
     
