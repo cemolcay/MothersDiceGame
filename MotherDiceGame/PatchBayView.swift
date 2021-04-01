@@ -65,7 +65,7 @@ class PatchView: UIView {
 }
 
 class PatchPointView<T: PatchPoint>: UIView {
-    let patchPoint: T
+    let patchPoint: T!
     let layoutStack = UIStackView()
     let label = UILabel()
     let patchView = PatchView()
@@ -76,16 +76,9 @@ class PatchPointView<T: PatchPoint>: UIView {
         commonInit()
     }
     
-    override init(frame: CGRect) {
-        self.patchPoint = T.allCases.first!
-        super.init(frame: frame)
-        commonInit()
-    }
-    
     required init?(coder: NSCoder) {
-        self.patchPoint = T.allCases.first!
+        self.patchPoint = .none
         super.init(coder: coder)
-        commonInit()
     }
     
     func commonInit() {
@@ -121,7 +114,7 @@ class PatchPointView<T: PatchPoint>: UIView {
 }
 
 class PatchBayView<T: PatchBay>: UIView {
-    let patchBay: T!
+    weak var patchBay: T!
     let layoutStack = UIStackView()
     var patchPoints: [PatchPointView<T.PatchPoints>] = []
 
