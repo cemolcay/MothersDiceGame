@@ -8,48 +8,42 @@
 import UIKit
 
 class ViewController: UIViewController {
+    var dfam = PatchBayView<DFAM>(patchBay: DFAM())
+    var mother32 = PatchBayView<Mother32>(patchBay: Mother32())
+    var subharmonicon = PatchBayView<Subharmonicon>(patchBay: Subharmonicon())
     let generator = PatchGenerator()
-    let mother32 = Mother32()
-    var mother32View: PatchBayView<Mother32>!
-    let dfam = DFAM()
-    var dfamView: PatchBayView<DFAM>!
-    let subharmonicon = Subharmonicon()
-    var subharmoniconView: PatchBayView<Subharmonicon>!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        dfamView = dfam.view
-//        view.addSubview(dfamView)
-//        dfamView.translatesAutoresizingMaskIntoConstraints = false
-//        dfamView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-//        dfamView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-//        dfamView.topAnchor.constraint(equalTo: view.topAnchor, constant: 60).isActive = true
-//        dfamView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+//        view.addSubview(dfam)
+//        dfam.translatesAutoresizingMaskIntoConstraints = false
+//        dfam.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+//        dfam.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+//        dfam.topAnchor.constraint(equalTo: view.topAnchor, constant: 60).isActive = true
+//        dfam.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
 
-        mother32View = mother32.view
-//        view.addSubview(mother32View)
-//        mother32View.translatesAutoresizingMaskIntoConstraints = false
-//        mother32View.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-//        mother32View.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-//        mother32View.topAnchor.constraint(equalTo: view.topAnchor, constant: 60).isActive = true
-//        mother32View.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+//        view.addSubview(mother32)
+//        mother32.translatesAutoresizingMaskIntoConstraints = false
+//        mother32.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+//        mother32.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+//        mother32.topAnchor.constraint(equalTo: view.topAnchor, constant: 60).isActive = true
+//        mother32.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         
-        subharmoniconView = subharmonicon.view
-//        view.addSubview(subharmoniconView)
-//        subharmoniconView.translatesAutoresizingMaskIntoConstraints = false
-//        subharmoniconView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-//        subharmoniconView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-//        subharmoniconView.topAnchor.constraint(equalTo: view.topAnchor, constant: 60).isActive = true
-//        subharmoniconView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+//        view.addSubview(subharmonicon)
+//        subharmonicon.translatesAutoresizingMaskIntoConstraints = false
+//        subharmonicon.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+//        subharmonicon.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+//        subharmonicon.topAnchor.constraint(equalTo: view.topAnchor, constant: 60).isActive = true
+//        subharmonicon.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         
         let patchBayLayout = UIStackView()
         patchBayLayout.axis = .horizontal
         patchBayLayout.spacing = 8
         patchBayLayout.alignment = .fill
         patchBayLayout.distribution = .fillEqually
-        patchBayLayout.addArrangedSubview(dfamView)
-        patchBayLayout.addArrangedSubview(mother32View)
+        patchBayLayout.addArrangedSubview(dfam)
+        patchBayLayout.addArrangedSubview(mother32)
         
         let generateButton = UIButton(type: .system)
         generateButton.setTitle("Generate Patch", for: .normal)
@@ -74,15 +68,9 @@ class ViewController: UIViewController {
     
     @IBAction func generatePatchButtonPressed(sender: UIButton) {
         guard let patch = generator.generatePatch() else { return }
-        dfamView.unhighlight()
-        dfamView.highlight(patchPoint: patch.from)
-        dfamView.highlight(patchPoint: patch.to)
-        mother32View.unhighlight()
-        mother32View.highlight(patchPoint: patch.from)
-        mother32View.highlight(patchPoint: patch.to)
-        subharmoniconView.unhighlight()
-        subharmoniconView.highlight(patchPoint: patch.from)
-        subharmoniconView.highlight(patchPoint: patch.to)
+        dfam.highlight(patch: patch)
+        mother32.highlight(patch: patch)
+        subharmonicon.highlight(patch: patch)
         print(patch)
     }
 }

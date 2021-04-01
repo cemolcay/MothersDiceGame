@@ -124,26 +124,32 @@ class PatchPointView<T: PatchPoint>: UIView {
 protocol PatchableView where Self: UIView {
     associatedtype PatchBayType: PatchBay
     var patchBay: PatchBayType { get set }
-    var patchPoints: [PatchPointView<PatchBayType.PatchPoints>] { get set }
+    var patchPointViews: [PatchPointView<PatchBayType.PatchPoints>] { get set }
 }
 
 extension PatchableView {
     func highlight(patchPoint: AnyPatchable) {
         if let point = patchPoint.hash.base as? PatchBayType.PatchPoints,
-           let pointView = patchPoints.first(where: { $0.patchPoint == point }) {
+           let pointView = patchPointViews.first(where: { $0.patchPoint == point }) {
             pointView.highlight()
         }
     }
+
+    func highlight(patch: Patch) {
+        unhighlight()
+        highlight(patchPoint: patch.input)
+        highlight(patchPoint: patch.output)
+    }
     
     func unhighlight() {
-        patchPoints.forEach({ $0.unhighlight() })
+        patchPointViews.forEach({ $0.unhighlight() })
     }
 }
 
 class PatchBayView<T: PatchBay>: UIView, PatchableView {
     typealias PatchBayType = T
     var patchBay: T
-    var patchPoints: [PatchPointView<T.PatchPoints>] = []
+    var patchPointViews: [PatchPointView<T.PatchPoints>] = []
     let layoutStack = UIStackView()
 
     init(patchBay: T) {
@@ -206,7 +212,7 @@ class PatchBayView<T: PatchBay>: UIView, PatchableView {
                 guard let patchPoint = T.PatchPoints(rawValue: (x * patchBay.colCount) + y as! T.PatchPoints.RawValue) else { continue }
                 let patchPointView = PatchPointView<T.PatchPoints>(patchPoint: patchPoint)
                 rowStack.addArrangedSubview(patchPointView)
-                patchPoints.append(patchPointView)
+                patchPointViews.append(patchPointView)
             }
         }
     }

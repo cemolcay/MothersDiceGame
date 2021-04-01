@@ -38,13 +38,8 @@ protocol PatchBay: class, Codable, Hashable {
 }
 
 extension PatchBay {
-        
     var patchPoints: [PatchPoints] {
         return PatchPoints.allCases as! [PatchPoints]
-    }
-    
-    var view: PatchBayView<Self> {
-        return PatchBayView<Self>(patchBay: self)
     }
     
     func hash(into hasher: inout Hasher) {
