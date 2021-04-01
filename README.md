@@ -80,7 +80,7 @@ dfam.highlight(patch: patch)
 mother32.highlight(patch: patch)
 ```
 
-![alt](https://raw.githubusercontent.com/cemolcay/MothersDiceGame/master/pb.gif)
+![alt](https://github.com/cemolcay/MothersDiceGame/raw/main/pb.gif)
 
 ## DFAM
 
