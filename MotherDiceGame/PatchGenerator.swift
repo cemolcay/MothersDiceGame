@@ -36,7 +36,7 @@ class PatchGenerator {
               let output = outputPoints.randomElement()
         else { return nil }
         return Patch(
-            from: input,
-            to: output)
+            from: output,
+            to: input)
     }
 }

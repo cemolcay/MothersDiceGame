@@ -113,11 +113,11 @@ class PatchPointView<T: PatchPoint>: UIView {
     }
 
     func highlight() {
-        backgroundColor = patchPoint.type == .input ? .blue : .red
+        patchView.backgroundColor = .red
     }
     
     func unhighlight() {
-        backgroundColor = .clear
+        patchView.backgroundColor = .clear
     }
 }
 
@@ -129,8 +129,9 @@ protocol PatchableView where Self: UIView {
 
 extension PatchableView {
     func highlight(patchPoint: AnyPatchable) {
-        if let point = patchPoints.first(where: { $0.patchPoint.hashValue == patchPoint.hashValue }) {
-            point.highlight()
+        if let point = patchPoint.hash.base as? PatchBayType.PatchPoints,
+           let pointView = patchPoints.first(where: { $0.patchPoint == point }) {
+            pointView.highlight()
         }
     }
     
